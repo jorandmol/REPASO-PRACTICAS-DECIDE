@@ -3,6 +3,8 @@
 Plataforma voto electrónico educativa
 =====================================
 
+Este es el estado [![Build Status](https://travis-ci.com/jorandmol/decide.svg?branch=master)](https://travis-ci.com/jorandmol/decide)
+
 El objetivo de este proyecto es implementar una plataforma de voto
 electrónico seguro, que cumpla una serie de garantías básicas, como la
 anonimicidad y el secreto del voto.
