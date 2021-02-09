@@ -15,14 +15,69 @@ from mixnet.mixcrypt import MixCrypt
 from mixnet.models import Auth
 from voting.models import Voting, Question, QuestionOption
 
+class VotingModelTestCase(BaseTestCase):
+    
+    def setUp(self):
+        q = Question(desc='question')
+        q.save()
+
+        opt1 = QuestionOption(question=q, option='option 1')
+        opt1.save()
+        opt2 = QuestionOption(question=q, option='option 2')
+        opt2.save()
+
+        self.v = Voting(name="Votation",question=q)
+        self.v.save()
+        super().setUp()
+
+    def tearDown(self):
+        super().tearDown()
+        self.v = None
+
+    def test_voting_creation(self):
+        v = Voting.objects.get(name="Votation")
+        self.assertEquals(v.question.options.all()[0].option,"option 1")
+
+    def test_update_voting_400(self):
+        v = self.v
+        data = {} #El campo action es requerido en la request
+        self.login()
+        response = self.client.put('/voting/{}/'.format(v.pk), data, format= 'json')
+        self.assertEquals(response.status_code, 400)
+
+    def test_create_voting_from_api(self):
+        data = {
+            'name': 'Example',
+            'desc': 'Description example',
+            'question': 'I want a ',
+            'question_opt': ['cat', 'dog', 'horse']
+        }
+
+        self.login()
+        response = self.client.post('/voting/', data, format='json')
+        self.assertEqual(response.status_code, 201)
+        v = Voting.objects.get(name="Example")
+        self.assertEquals(v.question.options.all()[0].option,"cat")
 
 class VotingTestCase(BaseTestCase):
 
     def setUp(self):
         super().setUp()
+        self.census = Census(voting_id=1, voter_id=1)
+        self.census.save()
 
     def tearDown(self):
         super().tearDown()
+        self.census = None
+
+    def test_store_census(self):
+        self.assertEqual(Census.objects.count(), 1)
+
+    def test_Voting_toString(self):
+        v = self.create_voting()
+        self.assertEquals(str(v),"test voting")
+        self.assertEquals(str(v.question),"test question")
+        self.assertEquals(str(v.question.options.all()[0]),"option 1 (2)")
 
     def encrypt_msg(self, msg, v, bits=settings.KEYBITS):
         pk = v.pub_key
