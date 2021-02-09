@@ -6,6 +6,7 @@ Este es el estado [![Build Status](https://travis-ci.com/jorandmol/decide.svg?br
 
 NO VEAA
 q guapo shikillo
+eeeeeeeee
 
 El objetivo de este proyecto es implementar una plataforma de voto
 electrónico seguro, que cumpla una serie de garantías básicas, como la
