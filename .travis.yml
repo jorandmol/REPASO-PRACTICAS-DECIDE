@@ -35,7 +35,8 @@ deploy:
   provider: heroku
   app: examen-egc-probando
   strategy: git
-  apikey: $HEROKU_AUTH_TOKEN
+  apikey: 
+    secure: BW8/nwVUpkQYJGkcWuQTEbXWysqyEsxudWk9lWVc9CWcP1SFx27ena1w1lqSJuxkkrrP5Q2B7/sNyEaFKnOhck0L5YfrlTIb4uyRLgWs8KjszfTvLfXAoeAYBRsRPYrhOTfD/OWT38UaCbGO4L4OLChcAyTAfLAuv4fQMkZ5TVtZnADTQ1MjYoEBES9FAknnENDbpfDeE4Dgupz/BKFjkHX0D3ppljQu9kKw8SV0r4L/YqnEDJkp+zqx+Hz8QGNeFnJVSEn6O0tQPeIccvqlutDg/YgG8c4aEu88wm8IHYqaIMx2mr2Wi3vvcNBj5uUmM5Bk8VzOeBoHD8BLUbuJiYiHvkXQCTwhe2boQQuet08zv9dr6goDRyN9W/NJSQ3kFbQRO9oszjEsByosWzhaBimuM8b78pmOQISMzN8aEdVUVaL7C72MwVldC2vC6C+HFJdPj4UXk+G5N+go87jhJTKaeiR/HXdb20SYo+ZaxwNBjaTBuzFjQ+HsNmCecFhrJ7l0wD/cipP7ekXOSL/m+BFp6Wfub42vazl8KxZj27OVdbmzufFgpwlB78fprxAZHd/wAHntiFsrj98FWN6VnFa8UHKlb4jpnwvklfWTdzB4IK/QB8Xxn30TXoSzttb2fKXEMv5eyqNE8tDvFpUxGaKWOwDeA+B+4M7FDsb1nW0=
 notifications:
   email:
     recipients:
