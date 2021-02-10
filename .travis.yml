@@ -6,7 +6,6 @@ services:
 addons:
   postgresql: "9.4"
   chrome: stable
-  firefox: latest
 before_script:
   - psql -U postgres -c "create user decide password 'decide'"
   - psql -U postgres -c "create database test_decide owner decide"
@@ -17,10 +16,6 @@ before_script:
 language: python
 python:
   - "3.6"
-  - "3.8"
-env:
-  - DJANGO_VERSION=2.1.13
-  - DJANGO_VERSION=2.2.6
 install:
   - pip install -q Django==$DJANGO_VERSION
   - pip install -r requirements.txt
@@ -32,15 +27,11 @@ install:
   - unzip chromedriver_linux64.zip 
   - rm chromedriver_linux64.zip
   - sudo mv -f chromedriver /usr/bin
-  - sudo chmod +x /usr/bin/chromedriver
-  - wget "https://github.com/mozilla/geckodriver/releases/download/v0.27.0/geckodriver-v0.27.0-linux64.tar.gz"
-  - tar xfz geckodriver-v0.27.0-linux64.tar.gz
-  - sudo mv -f geckodriver /usr/bin
-  - sudo chmod +x /usr/bin/geckodriver    
+  - sudo chmod +x /usr/bin/chromedriver  
 script:
   - cd decide
   - cp local_settings.travis.py local_settings.py
-  - coverage run --branch --source=. ./manage.py test --keepdb
+  - coverage run --branch --source=. ./manage.py test mixnet --keepdb
   - coverage xml
   - python-codacy-coverage -r coverage.xml
 deploy:
